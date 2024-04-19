@@ -21,7 +21,7 @@ public class Main {
         Characters Enemigo = new Warrior("Mordred",1,100,100, 15, 20, 12, 7, 20, 100, 0, 0, true, new BareKnucle());
 
         //Dungeon dungeon = new Dungeon(Jugador);
-        Mountains map = new Mountains(Jugador);
+        Plains map = new Plains(Jugador);
 
         System.out.println(Jugador.toString());
 
