@@ -13,6 +13,7 @@ public abstract class Maps {
     protected String M = new String(Character.toChars(0x1F9F1));
     protected String G = new String(Character.toChars(0x1F7E9));
     protected String R = new String(Character.toChars(0x1F7E6));
+    protected String D = new String(Character.toChars(0x1F7E8));
     protected String[][] table;
 
     protected List<Weapon> LootWeapons;
@@ -83,6 +84,8 @@ public abstract class Maps {
             }
         }
     */
+    public abstract void RunMap();
+
     protected void imprimirCuadrado(String[][] cuadrado) {
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 30; j++) {

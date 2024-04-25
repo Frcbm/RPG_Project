@@ -1,5 +1,7 @@
 package Character;
 import Item.*;
+import Scenario.Maps;
+
 import java.util.*;
 
 
@@ -20,6 +22,7 @@ public abstract class Characters implements CharacterAction {
     protected Weapon weapon;
     protected List<Weapon> Inventory = new ArrayList<>();
     protected boolean condition; //True para vivo, false para muerto
+    protected Maps actualMap;
     stats[] estadisticas = {level, hp, maxHp, str, def, intel, agl, mana, maxMana, exp, gold};
 
     public Characters(){
@@ -134,19 +137,30 @@ public abstract class Characters implements CharacterAction {
         }
     }
     private int menu(){
+        boolean correcto = true;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Es tu turno");
-        System.out.println("Elige una acción");
-        System.out.println("1. Atacar\n" +
-                "2. Cambiar de arma\n" +
-                "3. Habilidad\n" +
-                "4. Analizar enemigo");
-        int opcion = sc.nextInt();
-        while(opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4){
-            System.out.println("Introduce una de las posibles acciones");
-            opcion = sc.nextInt();
-        }
-        return opcion;
+        do {
+            try {
+                System.out.println("Es tu turno");
+                System.out.println("Elige una acción");
+                System.out.println("1. Atacar\n" +
+                        "2. Cambiar de arma\n" +
+                        "3. Habilidad\n" +
+                        "4. Analizar enemigo");
+                int opcion = sc.nextInt();
+                while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4) {
+                    System.out.println("Introduce una de las posibles acciones");
+                    opcion = sc.nextInt();
+                }
+                correcto = true;
+                return opcion;
+            } catch (InputMismatchException e) {
+                correcto = false;
+                sc.next();
+            }
+
+        }while(!correcto);
+        return 0;
     }
     public boolean combat(Characters player, Characters enemy){
         Scanner sc = new Scanner(System.in);
