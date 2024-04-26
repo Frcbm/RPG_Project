@@ -8,6 +8,7 @@ Francesc Sorà Quevedo
 Proyecto realizado para la asignatura de programación del primer curso de Desarrollo de Aplicaciones Web. Se basa en la simplificación de un juego tipo RPG de fantasía. 
 
 ## Estructura del repositorio
+&nbsp; &nbsp;src
 &nbsp; &nbsp;     |  
 &nbsp; &nbsp;     |-----__Character__  
 &nbsp; &nbsp;     |&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;         |  
