@@ -7,33 +7,15 @@ import Item.*;
 import java.sql.SQLOutput;
 import java.util.*;
 
-public class Maps {
-    private EnemySet enemigos;
-    private String M = new String(Character.toChars(0x1F9F1));
-    private String G = new String(Character.toChars(0x1F7E9));
-    protected String[][] table = {
-            {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M},
-            {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
-            {M,M,G,G,G,G,M,M,M,M,M,M,M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
-            {M,M,G,M,G,G,G,M,M,M,M,M,G,G,G,G,G,G,G,M,M,G,G,G,G,G,G,G,G,M},
-            {M,M,G,M,M,G,G,G,M,M,G,G,G,G,G,G,G,G,G,M,M,M,G,G,G,G,G,G,G,M},
-            {M,M,G,M,M,G,G,G,M,G,G,G,M,M,G,G,G,G,G,M,M,G,M,G,G,G,G,G,G,M},
-            {M,M,G,M,M,G,M,M,M,G,M,M,M,M,G,G,G,G,G,M,M,G,M,M,G,G,G,G,G,M},
-            {M,M,G,M,M,G,G,G,G,G,G,M,M,M,G,G,G,G,G,M,M,G,G,M,M,G,G,G,G,M},
-            {M,M,G,M,M,M,G,G,M,M,M,M,M,M,M,G,G,G,G,M,M,G,M,M,M,G,G,G,G,M},
-            {M,M,G,M,M,M,M,G,G,M,M,M,M,M,M,M,G,G,G,M,M,G,G,M,M,G,G,G,G,M},
-            {M,M,G,M,M,M,M,M,G,G,G,G,G,G,G,G,G,G,G,M,M,G,M,M,M,G,G,G,G,M},
-            {M,M,G,G,M,M,G,G,G,G,G,M,M,M,M,G,G,G,G,M,M,G,G,M,M,G,G,G,G,M},
-            {M,M,M,G,G,M,G,G,G,G,M,M,G,G,G,G,G,G,G,M,M,G,M,M,M,M,M,G,G,M},
-            {M,M,M,M,G,G,M,G,M,M,M,G,M,G,G,G,G,G,G,M,M,G,G,M,G,G,M,G,G,M},
-            {M,G,M,M,M,G,M,G,G,M,G,G,G,M,G,G,G,G,G,M,M,G,M,M,G,G,G,G,G,M},
-            {M,G,G,M,M,G,M,G,M,M,G,G,G,G,G,M,G,G,G,M,M,G,G,G,M,G,G,G,G,M},
-            {M,G,G,G,M,G,M,G,M,G,G,G,G,G,G,M,G,G,G,M,M,G,G,M,G,G,G,G,G,M},
-            {M,G,G,M,G,G,M,G,M,G,G,G,G,G,G,G,M,G,G,M,M,G,G,G,G,G,G,G,G,M},
-            {M,G,M,G,G,G,M,G,M,G,G,G,G,G,G,G,G,M,G,M,M,G,G,G,G,G,G,G,G,M},
-            {M,M,G,G,G,G,G,G,M,G,G,G,G,G,G,G,G,M,M,M,M,G,G,G,G,G,G,G,G,M},
-            {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M}
-    };
+public abstract class Maps {
+    protected EnemySet enemigos;
+    protected String S = new String(Character.toChars(0x1FAA8));
+    protected String M = new String(Character.toChars(0x1F9F1));
+    protected String G = new String(Character.toChars(0x1F7E9));
+    protected String R = new String(Character.toChars(0x1F7E6));
+    protected String D = new String(Character.toChars(0x1F7E8));
+    protected String P = new String(Character.toChars(0x1F335));
+    protected String[][] table;
 
     protected List<Weapon> LootWeapons;
     protected Characters player;
@@ -60,19 +42,19 @@ public class Maps {
         switch (sc.nextLine().toUpperCase()) {
             case "W":
                 positionY -= 1;
-                imprimirCuadrado(this.table, 1);
+                //imprimirCuadrado(this.table);
                 break;
             case "S":
                 positionY += 1;
-                imprimirCuadrado(this.table, 2);
+                //imprimirCuadrado(this.table);
                 break;
             case "A":
                 positionX -= 1;
-                imprimirCuadrado(this.table, 3);
+                //imprimirCuadrado(this.table);
                 break;
             case "D":
                 positionX += 1;
-                imprimirCuadrado(this.table, 4);
+                //imprimirCuadrado(this.table);
                 break;
             case "I":
 
@@ -81,49 +63,7 @@ public class Maps {
         }
     }
 
-    public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
-        boolean correcto = true;
-        int x = 0;
-        int y = 0;
-        do{
-            try{
-                imprimirCuadrado(this.table, positionY);
-                x = positionX;
-                y = positionY;
-                menu();
 
-                boolean a = true;
-                while (a) {
-                    if(table[positionX][positionY].equals(M)){
-                        throw new NotAllowedException();
-                    }
-                    correcto = true;
-                    int rand = (int) (Math.random() * 7) + 1;
-                    System.out.println("Encuentro: " + rand);
-                    /*if (rand == 7) {
-                        if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
-                            System.out.println("Combate ganado!!");
-                        } else {
-                            System.out.println("Has perdido...");
-                        }
-                    }*/
-                    x = positionX;
-                    y = positionY;
-                    menu();
-                }
-
-            }catch(IndexOutOfBoundsException e){
-                correcto = false;
-                System.out.println("No puedes salir del mapa");
-                positionX = x;
-                positionY = y;
-            }catch(NotAllowedException ex){
-
-            }
-        }while(!correcto);
-
-    }
 
     /*
         public void dibujarCuadrado(String[][] cuadrado) {
@@ -145,11 +85,12 @@ public class Maps {
             }
         }
     */
-    private void imprimirCuadrado(String[][] cuadrado, int cardinal) {
+    public abstract void RunMap();
 
+    protected void imprimirCuadrado(String[][] cuadrado) {
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 30; j++) {
-                if(positionX == j && positionY == i){
+                if (positionX == j && positionY == i) {
                     cuadrado[i][j] = new String(Character.toChars(0x1F464));
                 }
                 System.out.print(cuadrado[i][j]);

@@ -1,7 +1,7 @@
 package Exceptions;
 
 public class NotAllowedException extends Exception{
-    public NotAllowedException(){
-        super();
+    public NotAllowedException(String s){
+        super(s);
     }
 }

@@ -3,12 +3,14 @@ import Character.*;
 import Item.*;
 import Scenario.*;
 
+import java.util.Scanner;
+
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
         Weapon Puños = new BareKnucle();
         Weapon Excalibur = new Sword("Excalibur", 10);
         Weapon Clarent = new Sword("Clarent", 10);
@@ -21,7 +23,8 @@ public class Main {
         Characters Enemigo = new Warrior("Mordred",1,100,100, 15, 20, 12, 7, 20, 100, 0, 0, true, new BareKnucle());
 
         //Dungeon dungeon = new Dungeon(Jugador);
-        Maps map = new Maps(Jugador);
+        Maps map = new Desert(Jugador);
+        System.out.println("1 para montaña 2 para llanura 3 desierto");
 
         System.out.println(Jugador.toString());
 
