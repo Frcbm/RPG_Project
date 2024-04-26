@@ -8,12 +8,13 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 public abstract class Maps {
-    private EnemySet enemigos;
+    protected EnemySet enemigos;
     protected String S = new String(Character.toChars(0x1FAA8));
     protected String M = new String(Character.toChars(0x1F9F1));
     protected String G = new String(Character.toChars(0x1F7E9));
     protected String R = new String(Character.toChars(0x1F7E6));
     protected String D = new String(Character.toChars(0x1F7E8));
+    protected String P = new String(Character.toChars(0x1F335));
     protected String[][] table;
 
     protected List<Weapon> LootWeapons;

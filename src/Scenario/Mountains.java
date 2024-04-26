@@ -56,13 +56,13 @@ public class Mountains extends Maps {
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);
-                    /*if (rand == 7) {
+                    if (rand == 7) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {
                             System.out.println("Has perdido...");
                         }
-                    }*/
+                    }
                     x = positionX;
                     y = positionY;
                     menu();
@@ -74,10 +74,8 @@ public class Mountains extends Maps {
                 positionY = y;
             } catch(NotAllowedException ex){
                 System.out.println(ex.getMessage());
-
                 positionX = x;
                 positionY = y;
-
             }
         }while(true);
 
