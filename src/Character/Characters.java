@@ -198,7 +198,7 @@ public abstract class Characters implements CharacterAction {
         }
         if(player.isAlive()){
             player.gainExp(enemy);
-            System.out.println("Experiencia actual: "+player.getExp());
+            System.out.println("Experiencia actual: "+player.getExp().getStats());
             if(player.exp.getStats() >= 100) {
                 player.lvlUp();
             }
@@ -261,6 +261,9 @@ public abstract class Characters implements CharacterAction {
                     break;
             }
         }
+    }
+    protected void die(){
+        this.condition = false;
     }
 
 

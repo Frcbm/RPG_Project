@@ -32,7 +32,7 @@ public class Desert extends Maps {
 
     public Desert(Characters player) {
         super(player);
-
+        enemigos = new EnemySet(2);
     }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5);
@@ -46,7 +46,7 @@ public class Desert extends Maps {
                 y = positionY;
                 menu();
 
-                while (true) {
+                while (player.isAlive()) {
 
                     if(table[positionY][positionX].equals(M)
                             || table[positionY][positionX].equals(S)
@@ -65,7 +65,9 @@ public class Desert extends Maps {
                     }
                     x = positionX;
                     y = positionY;
-                    menu();
+                    if(player.isAlive()){
+                        menu();
+                    }
 
                 }
 
@@ -84,8 +86,7 @@ public class Desert extends Maps {
                 player.setHp(player.getHp().getStats() - 1);
             }
             System.out.println(player.getHp().getStats());
-        }while(true);
-
+        }while(player.isAlive());
     }
     protected void imprimirCuadrado(String[][] cuadrado) {
         for (int i = 0; i < 21; i++) {

@@ -36,7 +36,7 @@ public class Mountains extends Maps {
 
     public Mountains(Characters player) {
         super(player);
-
+        enemigos = new EnemySet(1);
     }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5);

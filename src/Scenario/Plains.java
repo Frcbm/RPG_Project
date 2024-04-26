@@ -34,7 +34,7 @@ public class Plains extends Maps{
     };
     public Plains(Characters player){
         super(player);
-
+        enemigos = new EnemySet(0);
     }
 
     public void RunMap() {

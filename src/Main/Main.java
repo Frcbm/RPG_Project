@@ -14,8 +14,7 @@ public class Main {
         Weapon Puños = new BareKnucle();
         Weapon Excalibur = new Sword("Excalibur", 10);
         Weapon Clarent = new Sword("Clarent", 10);
-        Weapon HacedorDeViudas = new Bow("Hacedor de Viudas", 12);
-        Weapon Palitroque = new Staff("Palitroque",5);
+        Weapon w = new Staff("Palitroque",5);
         Weapon Pincho = new Dagger("Pincho", 5);
 
 
