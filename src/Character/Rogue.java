@@ -46,7 +46,30 @@ public class Rogue extends Characters {
         }
     }
     public void Skill(Characters target){
-
+        int accuracy = (int) (Math.random()*100) + 1; //Roll para acertar o fallar
+        int critical = (int) (Math.random()*5) + 1; //Roll para golpe crítico (El pícaro tiene el doble de posiblidades)
+        accuracy -= this.agl.getStats();
+        System.out.println(name + " ataca a " + target.name);
+        if(accuracy <= 75 && target.isAlive()) {
+            int damage = ((int) (str.getStats() * 1.2)) + weapon.getDamage(); //Calculo del daño total
+            if(critical == 5){
+                damage *= 2; //El golpe crítico dobla el daño
+                System.out.println("Golpe crítico!");
+            }
+            int damageTaken = damage - target.def.getStats();
+            if (damageTaken <= 0) {
+                damageTaken = 0;
+            }
+            target.takeDamage(damageTaken);
+            System.out.println("El objetivo recibe " + damageTaken + " puntos de daño");
+            if (!target.isAlive()) {
+                System.out.println("El objetivo ha muerto!");
+            }
+        }else if(!target.isAlive()){
+            System.out.println(target.getName()+" ya esta muerto");
+        }else{
+            System.out.println("El ataque ha fallado!");
+        }
     }
     public String toString(){
         return "Este pícaro se llama "+name+" es de nivel " + level.getStats() + " y su arma es "+weapon.getName();
