@@ -23,7 +23,8 @@ public abstract class Characters implements CharacterAction {
     protected List<Weapon> Inventory = new ArrayList<>();
     protected boolean condition; //True para vivo, false para muerto
     protected Maps actualMap;
-    stats[] estadisticas = {level, hp, maxHp, str, def, intel, agl, mana, maxMana, exp, gold};
+    private String[] nombresStats ={"level", "hp", "maxHp", "str", "def", "intel", "agl", "mana", "maxMana", "exp","gold"};
+    private stats[] estadisticas;
 
     public Characters(){
 
@@ -43,9 +44,23 @@ public abstract class Characters implements CharacterAction {
         this.name = name;
         this.condition = condition;
         this.weapon = weapon;
+        this.estadisticas = new stats[10];
+        setStats();
+    }
+    public void setStats(){
+        this.estadisticas[0] = level;
+        this.estadisticas[1] = hp;
+        this.estadisticas[2] = maxHp;
+        this.estadisticas[3] = str;
+        this.estadisticas[4] = def;
+        this.estadisticas[5] = agl;
+        this.estadisticas[6] = intel;
+        this.estadisticas[7] = mana;
+        this.estadisticas[8] = maxMana;
+        this.estadisticas[9] = exp;
+
 
     }
-
     public void getStats(){
         System.out.println("Fuerza: "+str.getStats()+
                 " Agilidad: "+agl.getStats()+
@@ -262,8 +277,14 @@ public abstract class Characters implements CharacterAction {
             }
         }
     }
-    protected void die(){
-        this.condition = false;
+    public String getStatName(int i){
+        return nombresStats[i];
+    }
+    public int getStat(int i){
+        return estadisticas[i].getStats();
+    }
+    public int statsLength(){
+        return estadisticas.length;
     }
 
 

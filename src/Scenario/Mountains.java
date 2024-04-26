@@ -50,7 +50,7 @@ public class Mountains extends Maps {
                 y = positionY;
                 menu();
 
-                while (true) {
+                while (player.isAlive()) {
 
                     if(table[positionY][positionX].equals(M)) throw new NotAllowedException("No puedes salir del mapa");
                     imprimirCuadrado(this.table);
@@ -65,7 +65,9 @@ public class Mountains extends Maps {
                     }
                     x = positionX;
                     y = positionY;
-                    menu();
+                    if(player.isAlive()){
+                        menu();
+                    }
                 }
 
             }catch(IndexOutOfBoundsException e){
@@ -77,7 +79,7 @@ public class Mountains extends Maps {
                 positionX = x;
                 positionY = y;
             }
-        }while(true);
+        }while(player.isAlive());
 
     }
 

@@ -88,6 +88,10 @@ public abstract class Maps {
     public abstract void RunMap();
 
     protected void imprimirCuadrado(String[][] cuadrado) {
+        for(int i = 0; i < player.statsLength() ; i++){
+            System.out.print(player.getStatName(i) + ": " + player.getStat(i) + " ");
+        }
+        System.out.println("\n");
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 30; j++) {
                 if (positionX == j && positionY == i) {

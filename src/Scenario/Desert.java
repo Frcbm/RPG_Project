@@ -83,7 +83,7 @@ public class Desert extends Maps {
                 System.out.println(exc.getMessage());
                 positionX = x;
                 positionY = y;
-                player.setHp(player.getHp().getStats() - 1);
+                player.takeDamage(1);
             }
             System.out.println(player.getHp().getStats());
         }while(player.isAlive());

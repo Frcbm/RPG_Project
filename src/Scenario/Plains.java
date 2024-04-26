@@ -49,7 +49,7 @@ public class Plains extends Maps{
                 y = positionY;
                 menu();
 
-                while (true) {
+                while (player.isAlive()) {
 
                     if(table[positionY][positionX].equals(M)
                     || table[positionY][positionX].equals(S)
@@ -66,7 +66,10 @@ public class Plains extends Maps{
                     }
                     x = positionX;
                     y = positionY;
-                    menu();
+                    if(player.isAlive()){
+                        menu();
+                    }
+
                 }
 
             }catch(IndexOutOfBoundsException e){
@@ -80,7 +83,7 @@ public class Plains extends Maps{
                 positionY = y;
 
             }
-        }while(true);
+        }while(player.isAlive());
 
     }
 
