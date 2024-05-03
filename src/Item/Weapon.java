@@ -21,6 +21,9 @@ public abstract class Weapon {
         this.type = type;
     }
     public abstract int getDamage();
+    public double getMagicMod(){
+        return 1;
+    }
     public void setDamage(int damage){
         this.damage = damage;
     }
