@@ -56,7 +56,7 @@ public class Desert extends Maps {
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);
-                    if (rand == 7) {
+                    if (rand == 8) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {
@@ -89,6 +89,10 @@ public class Desert extends Maps {
         }while(player.isAlive());
     }
     protected void imprimirCuadrado(String[][] cuadrado) {
+        for(int i = 0; i < player.statsLength() ; i++){
+            System.out.print(player.getStatName(i) + ": " + player.getStat(i) + " ");
+        }
+        System.out.print("\n");
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 30; j++) {
                 if (positionX == j && positionY == i) {

@@ -57,7 +57,7 @@ public class Plains extends Maps{
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);
-                    if (rand == 7) {
+                    if (rand == 8) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {
