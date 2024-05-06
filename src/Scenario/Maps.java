@@ -9,12 +9,12 @@ import java.util.*;
 
 public abstract class Maps {
     protected EnemySet enemigos;
-    protected String S = new String(Character.toChars(0x1FAA8));
+    protected String S = new String(Character.toChars(0x1F9F1));
     protected String M = new String(Character.toChars(0x1F9F1));
     protected String G = new String(Character.toChars(0x1F7E9));
     protected String R = new String(Character.toChars(0x1F7E6));
     protected String D = new String(Character.toChars(0x1F7E8));
-    protected String P = new String(Character.toChars(0x1F335));
+    protected String P = new String(Character.toChars(0x1F38D));
     protected String[][] table;
 
     protected List<Weapon> LootWeapons;
