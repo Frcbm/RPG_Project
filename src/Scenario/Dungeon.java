@@ -1,37 +1,36 @@
 package Scenario;
 import Character.*;
 import Item.*;
-import java.util.ArrayList;
-import java.util.*;
+
 
 public class Dungeon {
-    private Weapon Puños = new BareKnucle();
-    private Weapon Daga = new Dagger("Daga roma",1);
-    private Weapon BusterSword = new Sword("Buster Sword",20);
-
-
-    protected List<Weapon> LootWeapons;
     protected Characters player;
+    private EnemySet enemigos;
+    private Enemy boss;
+    private static int dunLvL = 2;
 
-    private ArrayList<Characters> Enemies;
-
+    public Dungeon(Characters player, int varianza, int lvlBoss, int vidaBoss, int strBoss, int defBoss, int agiBoss, int intelBoss, int manaBoss, int maxManaBoss, int expBoss, int goldBoss) {
+        this.player = player;
+        enemigos = new EnemySet(varianza);
+        boss = new Enemy("Dragon", lvlBoss, vidaBoss, vidaBoss, strBoss, defBoss,agiBoss, intelBoss, manaBoss, maxManaBoss, expBoss, goldBoss, true, new BareKnucle());
+    }
+    public int getDunLvL(){
+        return dunLvL;
+    }
+    public int aumentardunLvl(){
+        if(dunLvL++ >= 6){
+            dunLvL = 1;
+        }
+        return dunLvL++;
+    }
 
     public void runMaze(){
-        while(!Enemies.isEmpty()){
-            System.out.println("Te enfrentas a "+Enemies.getFirst().getName());
-            if(player.combat(player,Enemies.getFirst())) {
-                System.out.println("Combate ganado!!");
-                //System.out.println("Has ganado: "+Enemies.getFirst().getExp()+" puntos de experiencia!");
-                //System.out.println("----------------");
-            }else{
-                System.out.println("Has perddido...");
-            }
-            player.addToInvetory(BusterSword);
-            Enemies.removeFirst();
-            //player.setHp(100);
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));//
         }
-
+        player.combat(player, boss);
         System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
     }
 
 
