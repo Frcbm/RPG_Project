@@ -1,5 +1,5 @@
 package Scenario;
-import Character.Characters;
+import Character.*;
 import Item.*;
 import java.util.*;
 public class Shop {
@@ -38,13 +38,16 @@ public class Shop {
         potionList.add(Hppotion6);
     }
 
-    public void runShop(Character character){
+    public void runShop(Characters player){
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido a mi tienda\n"+
                            "Que artículo quieres comprar?");
 
         showItems();
         int option = sc.nextInt();
+        if(player.getGold() > weaponList.get(option).getPrice()){
+            //Restar preu als diners totals
+        }
 
     }
     public void showItems(){
