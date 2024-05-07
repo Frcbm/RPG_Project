@@ -1,5 +1,6 @@
 package Scenario;
 
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -39,7 +40,7 @@ public class Mountains extends Maps {
         enemigos = new EnemySet(1);
     }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 10);
 
         int x = 0;
         int y = 0;
@@ -51,7 +52,7 @@ public class Mountains extends Maps {
                 menu();
 
                 while (player.isAlive()) {
-
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)) throw new NotAllowedException("No puedes salir del mapa");
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
@@ -78,6 +79,8 @@ public class Mountains extends Maps {
                 System.out.println(ex.getMessage());
                 positionX = x;
                 positionY = y;
+            } catch(EnterDungeon e){
+                runMaze();
             }
         }while(player.isAlive());
 

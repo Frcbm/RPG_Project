@@ -1,6 +1,7 @@
 package Scenario;
 
 import Exceptions.CactusException;
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -35,7 +36,7 @@ public class Desert extends Maps {
         enemigos = new EnemySet(2);
     }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 20);
 
         int x = 0;
         int y = 0;
@@ -47,7 +48,7 @@ public class Desert extends Maps {
                 menu();
 
                 while (player.isAlive()) {
-
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                             || table[positionY][positionX].equals(S)
                             || table[positionY][positionX].equals(R)
@@ -84,6 +85,8 @@ public class Desert extends Maps {
                 positionX = x;
                 positionY = y;
                 player.takeDamage(1);
+            } catch(EnterDungeon e){
+                runMaze();
             }
             System.out.println(player.getHp().getStats());
         }while(player.isAlive());
