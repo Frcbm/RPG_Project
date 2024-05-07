@@ -8,10 +8,10 @@ import Character.*;
 public class Desert extends Maps {
     private String[][] table = {
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M},
-            {M, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, A, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, P, D, D, D, D, D, D, D, P, D, D, D, D, D, D, P, D, D, D, D, D, D, D, D, D, D, M},
-            {M, D, D, D, S, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, A, D, D, S, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, P, D, D, M},
@@ -26,7 +26,7 @@ public class Desert extends Maps {
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, S, R, R, R, P, D, D, D, D, D, M},
-            {M, D, D, D, D, D, D, D, D, P, D, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, D, D, D, P, A, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
 

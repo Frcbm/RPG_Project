@@ -9,6 +9,7 @@ import java.util.*;
 
 public abstract class Maps {
     protected EnemySet enemigos;
+    protected String A = new String(Character.toChars(0x1F480));
     protected String S = new String(Character.toChars(0x1F9F1));
     protected String M = new String(Character.toChars(0x1F9F1));
     protected String G = new String(Character.toChars(0x1F7E9));
@@ -16,21 +17,36 @@ public abstract class Maps {
     protected String D = new String(Character.toChars(0x1F7E8));
     protected String P = new String(Character.toChars(0x1F38D));
     protected String[][] table;
-
+    protected Dungeon[] dungeons;
     protected List<Weapon> LootWeapons;
     protected Characters player;
     protected int positionX;
     protected int positionY;
-
+    protected int dunLvl;
 
     public Maps(Characters player) {
-
+        dungeons = new Dungeon[3];
+        this.dunLvl = 2;
         this.player = player;
         this.positionX = 28;
         this.positionY = 19;
         this.enemigos = new EnemySet(0);
     }
+    public void runMaze(){
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));//
+        }
+        player.combat(player, dungeons[dunLvl- 2].getBoss());
+        System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
 
+    }
+    public int getDunLvL(){
+        return this.dunLvl;
+    }
+    public int aumentardunLvl(){
+        return dunLvl >= 4 ? dunLvl : dunLvl++;
+    }
     public void menu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Elige una accion:\n" +
