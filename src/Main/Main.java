@@ -12,10 +12,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Weapon Puños = new BareKnucle();
-        Weapon Excalibur = new Sword("Excalibur", 10);
-        Weapon Clarent = new Sword("Clarent", 10);
-        Weapon w = new Staff("Palitroque",5,1.2);
-        Weapon Pincho = new Dagger("Pincho", 5);
+        Weapon Excalibur = new Sword("Excalibur", 10,1);
+        Weapon Clarent = new Sword("Clarent", 10,1);
+        Weapon w = new Staff("Palitroque",5,1.2,1);
+        Weapon Pincho = new Dagger("Pincho", 5,1);
 
         Characters Jugador = new Warrior("Arturo", 1,100,100, 15, 20, 12, 7, 20, 100, 0, 0, true, new BareKnucle());
         Characters Enemigo = new Warrior("Mordred",1,100,100, 15, 20, 12, 7, 20, 100, 0, 0, true, new BareKnucle());

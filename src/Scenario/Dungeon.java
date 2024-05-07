@@ -20,7 +20,7 @@ public class Dungeon {
     public int aumentardunLvl(){
 
 
-        
+
         if(dunLvL++ >= 6){
             dunLvL = 1;
         }
