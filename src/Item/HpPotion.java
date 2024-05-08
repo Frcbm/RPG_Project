@@ -3,7 +3,9 @@ import Character.*;
 
 public class HpPotion extends Potions{
     public HpPotion(int level){
+
         super(level);
+        this.type = 1;
     }
     public void use(Characters character){
         character.setHp(character.getHp().getStats() + (50 * this.level));

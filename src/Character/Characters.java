@@ -21,6 +21,8 @@ public abstract class Characters implements CharacterAction {
 
     protected Weapon weapon;
     protected List<Weapon> Inventory = new ArrayList<>();
+    protected List<Potions> Alchemy = new ArrayList<>();
+
     protected boolean condition; //True para vivo, false para muerto
     protected Maps actualMap;
     private String[] nombresStats ={"level", "hp", "maxHp", "str", "def", "intel", "agl", "mana", "maxMana", "exp","gold"};
@@ -46,6 +48,7 @@ public abstract class Characters implements CharacterAction {
         this.weapon = weapon;
         this.estadisticas = new stats[10];
         setStats();
+        Alchemy.add(new HpPotion(1));
     }
     public void setStats(){
         this.estadisticas[0] = level;
@@ -102,9 +105,9 @@ public abstract class Characters implements CharacterAction {
     public void addToInvetory(Weapon weapon){
         Inventory.add(weapon);
     }
-    public void changeWeapon(Weapon newWeapon){
-        System.out.println(name+" se ha equipado "+newWeapon.getName());
-        this.weapon = newWeapon;
+    public void changeWeapon(int opcion){
+        this.weapon = Inventory.get(opcion);
+        System.out.println("Se ha equipado "+this.weapon.getName());
     }
 
     public void attack(Characters target){ //Ataque básico cuerpo a cuerpo
@@ -163,7 +166,7 @@ public abstract class Characters implements CharacterAction {
                 System.out.println("Es tu turno");
                 System.out.println("Elige una acción");
                 System.out.println("1. Atacar\n" +
-                        "2. Cambiar de arma\n" +
+                        "2. Inventario\n" +
                         "3. Habilidad\n" +
                         "4. Analizar enemigo");
                 int opcion = sc.nextInt();
@@ -196,10 +199,9 @@ public abstract class Characters implements CharacterAction {
                     if(Inventory.isEmpty()){
                         System.out.println("El inventario esta vacio!");
                     }else{
-                        System.out.println("Que arma quieres equipar?");
+                        System.out.println("Inventario");
                         getInventory();
-                        System.out.println("Elige que arma quieres usar");
-                        player.changeWeapon(Inventory.get(sc.nextInt()));
+                        manageInvent(player);
                     }
                     break;
                 case 3:
@@ -223,6 +225,60 @@ public abstract class Characters implements CharacterAction {
             }
         } //Si el jugador sigue vivo al terminar el combate gana experiencia
         return player.isAlive();
+    }
+    public void manageInvent(Characters player){
+        Scanner sc = new Scanner(System.in);
+        int election;
+        System.out.println("Quieres:\n" +
+                           "1. Usar una poción\n " +
+                           "2. Cambiar de arma");
+
+        int opcion = sc.nextInt();
+        switch(opcion){
+            case 1:
+                if(!Alchemy.isEmpty()){
+                    System.out.println("Que tipo de pocion quieres usar?\n" +
+                            "1. Hp\n" +
+                            "2. Mana");
+                    election = sc.nextInt();
+                    switch(election){
+                        case 1:
+                            for(int i = 0; i < Alchemy.size(); i++){
+                                if(Alchemy.get(i).getType() == 1){
+                                    Alchemy.get(i).use(player);
+                                    break;
+                                }
+                                System.out.println("No te quedan pociones de vida");
+                            }
+                            break;
+                        case 2:
+                            for(int i = 0; i < Alchemy.size(); i++){
+                                if(Alchemy.get(i).getType() == 2){
+                                    Alchemy.get(i).use(player);
+                                    break;
+                                }
+                                System.out.println("No te quedan pociones de mana");
+                            }
+                            break;
+                        default:
+                            System.out.println("No es una opcion valida");
+                    }
+                }else{
+                    System.out.println("No te quedan pociones!");
+                }
+                break;
+            case 2:
+                if(!Inventory.isEmpty()){
+                    getInventory();
+                    election = sc.nextInt();
+                    player.changeWeapon(election);
+                }else{
+                    System.out.println("El inventario esta vacio");
+                }
+                break;
+            default:
+                System.out.println("No es una opcion valida");
+        }
     }
     public void gainExp(Characters enemy){
         int lvlDiff = level.getStats() - enemy.level.getStats();

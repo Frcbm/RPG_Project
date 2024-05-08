@@ -46,6 +46,9 @@ public abstract class Weapon {
     public String toString(){
         return "Este arma es "+name+" y su daño es"+damage;
     }
+    public boolean isWeapon(){
+        return true;
+    }
 
 
 }
