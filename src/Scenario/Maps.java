@@ -74,6 +74,7 @@ public abstract class Maps {
                 break;
             case "I":
                 player.manageInvent(player);
+                break;
             default:
                 break;
         }

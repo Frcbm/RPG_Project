@@ -1,4 +1,5 @@
 package Character;
+import Item.HpPotion;
 import Item.Weapon;
 
 import java.util.Scanner;
@@ -7,6 +8,7 @@ public class Warrior extends Characters {
     public Warrior(String name, int level, int hp, int maxHp, int str, int def, int agl, int intel, int mana, int maxMana, int exp, int gold, boolean condition, Weapon weapon){
         super(name, level,hp,maxHp,str,def,agl,intel,mana, maxMana,exp, gold, condition, weapon);
         System.out.println(toString());
+        Alchemy.add(new HpPotion(1));
     }
 
     @Override
