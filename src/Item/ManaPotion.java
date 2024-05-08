@@ -3,7 +3,9 @@ import Character.*;
 
 public class ManaPotion extends Potions{
     public ManaPotion(int level){
+
         super(level);
+        this.type = 2;
     }
     public int use(){
         return 10*this.level;

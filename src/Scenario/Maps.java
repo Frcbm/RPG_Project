@@ -77,7 +77,7 @@ public abstract class Maps {
                 //imprimirCuadrado(this.table);
                 break;
             case "I":
-
+                player.manageInvent(player);
             default:
                 break;
         }
