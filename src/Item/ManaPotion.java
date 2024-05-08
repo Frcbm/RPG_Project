@@ -15,4 +15,8 @@ public class ManaPotion extends Potions{
             character.setHp(character.getMaxMana().getStats());
         }
     }
+    @Override
+    public String toString(){
+        return "Pocion de mana de nivel "+level;
+    }
 }

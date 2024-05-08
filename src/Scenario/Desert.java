@@ -1,6 +1,7 @@
 package Scenario;
 
 import Exceptions.CactusException;
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -8,10 +9,10 @@ import Character.*;
 public class Desert extends Maps {
     private String[][] table = {
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M},
-            {M, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, A, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, P, D, D, D, D, D, D, D, P, D, D, D, D, D, D, P, D, D, D, D, D, D, D, D, D, D, M},
-            {M, D, D, D, S, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, A, D, D, S, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, P, D, D, M},
@@ -26,16 +27,20 @@ public class Desert extends Maps {
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, S, R, R, R, P, D, D, D, D, D, M},
-            {M, D, D, D, D, D, D, D, D, P, D, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, D, D, D, P, A, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
-
+    private int varianza;
     public Desert(Characters player) {
         super(player);
-
+        varianza = 2;
+        enemigos = new EnemySet(varianza);
+    }
+    public int getVarianza(){
+        return this.varianza;
     }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 20);
 
         int x = 0;
         int y = 0;
@@ -46,8 +51,8 @@ public class Desert extends Maps {
                 y = positionY;
                 menu();
 
-                while (true) {
-
+                while (player.isAlive()) {
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                             || table[positionY][positionX].equals(S)
                             || table[positionY][positionX].equals(R)
@@ -56,7 +61,7 @@ public class Desert extends Maps {
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);
-                    if (rand == 7) {
+                    if (rand == 8) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {
@@ -65,7 +70,9 @@ public class Desert extends Maps {
                     }
                     x = positionX;
                     y = positionY;
-                    menu();
+                    if(player.isAlive()){
+                        menu();
+                    }
 
                 }
 
@@ -81,13 +88,18 @@ public class Desert extends Maps {
                 System.out.println(exc.getMessage());
                 positionX = x;
                 positionY = y;
-                player.setHp(player.getHp().getStats() - 1);
+                player.takeDamage(1);
+            } catch(EnterDungeon e){
+                runMaze();
             }
             System.out.println(player.getHp().getStats());
-        }while(true);
-
+        }while(player.isAlive());
     }
     protected void imprimirCuadrado(String[][] cuadrado) {
+        for(int i = 0; i < player.statsLength() ; i++){
+            System.out.print(player.getStatName(i) + ": " + player.getStat(i) + " ");
+        }
+        System.out.print("\n");
         for (int i = 0; i < 21; i++) {
             for (int j = 0; j < 30; j++) {
                 if (positionX == j && positionY == i) {

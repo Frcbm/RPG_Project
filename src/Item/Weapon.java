@@ -4,6 +4,7 @@ public abstract class Weapon {
     protected int damage;
     protected String name;
     protected int range;//Todavia no se usa para nada
+    protected int price;
     /*
        Leyenda de tipos de armas:
            0. Manos desnudas
@@ -14,13 +15,20 @@ public abstract class Weapon {
     protected int type; //Tipo de arma: espada, arco, baston....
 
 
-    public Weapon(String name, int damage, int range, int type){
+    public Weapon(String name, int damage, int range, int type, int price){
         this.damage = damage;
         this.name = name;
         this.range = range;
         this.type = type;
+        this.price = price;
     }
     public abstract int getDamage();
+    public int getPrice(){
+        return this.price;
+    }
+    public double getMagicMod(){
+        return 1;
+    }
     public void setDamage(int damage){
         this.damage = damage;
     }

@@ -28,7 +28,7 @@ public class Mage extends Characters {
                 mana.setStats(0);
             }
             System.out.println(name + " lanza una bola de fuego a " + target.name);
-            int damage = (intel.getStats() * 3); //Calculo del daño total
+            int damage = (int)((intel.getStats() * 3)*weapon.getMagicMod()); //Calculo del daño total
             int damageTaken = damage - target.intel.getStats(); //Calculo del daño recibido
             if (damageTaken <= 0) {
                 damageTaken = 0;

@@ -1,4 +1,5 @@
 package Scenario;
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -15,9 +16,9 @@ public class Plains extends Maps{
             {M,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,R,R,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,M},
-            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,R,R,R,R,R,R,R,M},
+            {M,A,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,R,R,R,R,R,R,R,M},
             {M,G,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,G,M},
-            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,G,G,M},
+            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,G,A,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,M},
             {M,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,M},
             {M,G,G,G,G,R,R,R,R,R,R,R,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,G,M},
@@ -29,16 +30,20 @@ public class Plains extends Maps{
             {M,R,R,R,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
             {M,R,R,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
             {M,R,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
-            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,M},
+            {M,A,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,M},
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M}
     };
+    public int varianza;
     public Plains(Characters player){
         super(player);
-
+        this.varianza = 0;
+        enemigos = new EnemySet(varianza);
     }
-
+    public int getVarianza(){
+        return this.varianza;
+    }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 5);
 
         int x = 0;
         int y = 0;
@@ -49,15 +54,15 @@ public class Plains extends Maps{
                 y = positionY;
                 menu();
 
-                while (true) {
-
+                while (player.isAlive()) {
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                     || table[positionY][positionX].equals(S)
                     || table[positionY][positionX].equals(R)) throw new NotAllowedException("No puedes salir del mapa");
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);
-                    if (rand == 7) {
+                    if (rand == 8) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {
@@ -66,7 +71,10 @@ public class Plains extends Maps{
                     }
                     x = positionX;
                     y = positionY;
-                    menu();
+                    if(player.isAlive()){
+                        menu();
+                    }
+
                 }
 
             }catch(IndexOutOfBoundsException e){
@@ -79,8 +87,10 @@ public class Plains extends Maps{
                 positionX = x;
                 positionY = y;
 
+            } catch(EnterDungeon e){
+                runMaze();
             }
-        }while(true);
+        }while(player.isAlive());
 
     }
 

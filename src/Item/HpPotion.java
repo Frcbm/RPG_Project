@@ -11,4 +11,8 @@ public class HpPotion extends Potions{
             character.setHp(character.getMaxHp().getStats());
         }
     }
+    @Override
+    public String toString(){
+        return "Pocion de vida de nivel "+level;
+    }
 }

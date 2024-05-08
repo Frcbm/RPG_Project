@@ -22,9 +22,10 @@ public abstract class Characters implements CharacterAction {
     protected Weapon weapon;
     protected List<Weapon> Inventory = new ArrayList<>();
     protected boolean condition; //True para vivo, false para muerto
-    protected Maps actualMap;
-    stats[] estadisticas = {level, hp, maxHp, str, def, intel, agl, mana, maxMana, exp, gold};
-
+    private Maps actualMap;
+    private String[] nombresStats ={"level", "hp", "maxHp", "str", "def", "intel", "agl", "mana", "maxMana", "exp","gold"};
+    private stats[] estadisticas;
+    private EnemySet enemigos;
     public Characters(){
 
     }
@@ -43,9 +44,26 @@ public abstract class Characters implements CharacterAction {
         this.name = name;
         this.condition = condition;
         this.weapon = weapon;
+        this.estadisticas = new stats[10];
+        setStats();
+    }
+    public Maps getActualMap(){
+        return actualMap;
+    }
+    public void setStats(){
+        this.estadisticas[0] = level;
+        this.estadisticas[1] = hp;
+        this.estadisticas[2] = maxHp;
+        this.estadisticas[3] = str;
+        this.estadisticas[4] = def;
+        this.estadisticas[5] = agl;
+        this.estadisticas[6] = intel;
+        this.estadisticas[7] = mana;
+        this.estadisticas[8] = maxMana;
+        this.estadisticas[9] = exp;
+
 
     }
-
     public void getStats(){
         System.out.println("Fuerza: "+str.getStats()+
                 " Agilidad: "+agl.getStats()+
@@ -53,6 +71,10 @@ public abstract class Characters implements CharacterAction {
     }
     public void setHp(int hp){
         this.hp.setStats(hp);
+    }
+
+    public int getGold(){
+        return this.gold.getStats();
     }
     public stats getExp(){
         return this.exp;
@@ -198,10 +220,11 @@ public abstract class Characters implements CharacterAction {
         }
         if(player.isAlive()){
             player.gainExp(enemy);
-            System.out.println("Experiencia actual: "+player.getExp());
+            System.out.println("Experiencia actual: "+player.getExp().getStats());
             if(player.exp.getStats() >= 100) {
                 player.lvlUp();
             }
+            actualMap.setEnemigos(new EnemySet(actualMap.getVarianza()));
         } //Si el jugador sigue vivo al terminar el combate gana experiencia
         return player.isAlive();
     }
@@ -262,6 +285,13 @@ public abstract class Characters implements CharacterAction {
             }
         }
     }
-
-
+    public String getStatName(int i){
+        return nombresStats[i];
+    }
+    public int getStat(int i){
+        return estadisticas[i].getStats();
+    }
+    public int statsLength(){
+        return estadisticas.length;
+    }
 }
