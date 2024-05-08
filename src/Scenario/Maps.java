@@ -32,6 +32,7 @@ public abstract class Maps {
         this.positionY = 19;
         this.enemigos = new EnemySet(0);
     }
+    public abstract int getVarianza();
     public void runMaze(){
         for(int i = 0 ; i < 4 ; i++){
             player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));//
@@ -40,6 +41,9 @@ public abstract class Maps {
         System.out.println("Enhorabuena, has terminado la mazmorra!");
         aumentardunLvl();
 
+    }
+    public void setEnemigos(EnemySet enemigos){
+        this.enemigos = enemigos;
     }
     public int getDunLvL(){
         return this.dunLvl;

@@ -34,10 +34,14 @@ public class Mountains extends Maps {
             {M, M, G, G, G, G, G, G, M, G, G, G, G, G, G, G, G, M, M, M, M, G, G, G, G, G, G, G, G, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
-
+    private int varianza;
     public Mountains(Characters player) {
         super(player);
-        enemigos = new EnemySet(1);
+        varianza = 1;
+        enemigos = new EnemySet(varianza);
+    }
+    public int getVarianza(){
+        return this.varianza;
     }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5, 10);

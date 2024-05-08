@@ -33,11 +33,15 @@ public class Plains extends Maps{
             {M,A,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,M},
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M}
     };
+    public int varianza;
     public Plains(Characters player){
         super(player);
-        enemigos = new EnemySet(0);
+        this.varianza = 0;
+        enemigos = new EnemySet(varianza);
     }
-
+    public int getVarianza(){
+        return this.varianza;
+    }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5, 5);
 

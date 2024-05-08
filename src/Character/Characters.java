@@ -22,10 +22,10 @@ public abstract class Characters implements CharacterAction {
     protected Weapon weapon;
     protected List<Weapon> Inventory = new ArrayList<>();
     protected boolean condition; //True para vivo, false para muerto
-    protected Maps actualMap;
+    private Maps actualMap;
     private String[] nombresStats ={"level", "hp", "maxHp", "str", "def", "intel", "agl", "mana", "maxMana", "exp","gold"};
     private stats[] estadisticas;
-
+    private EnemySet enemigos;
     public Characters(){
 
     }
@@ -46,6 +46,9 @@ public abstract class Characters implements CharacterAction {
         this.weapon = weapon;
         this.estadisticas = new stats[10];
         setStats();
+    }
+    public Maps getActualMap(){
+        return actualMap;
     }
     public void setStats(){
         this.estadisticas[0] = level;
@@ -221,6 +224,7 @@ public abstract class Characters implements CharacterAction {
             if(player.exp.getStats() >= 100) {
                 player.lvlUp();
             }
+            actualMap.setEnemigos(new EnemySet(actualMap.getVarianza()));
         } //Si el jugador sigue vivo al terminar el combate gana experiencia
         return player.isAlive();
     }
@@ -290,6 +294,4 @@ public abstract class Characters implements CharacterAction {
     public int statsLength(){
         return estadisticas.length;
     }
-
-
 }

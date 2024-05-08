@@ -30,10 +30,14 @@ public class Desert extends Maps {
             {M, D, D, D, D, D, D, D, D, P, A, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
-
+    private int varianza;
     public Desert(Characters player) {
         super(player);
-        enemigos = new EnemySet(2);
+        varianza = 2;
+        enemigos = new EnemySet(varianza);
+    }
+    public int getVarianza(){
+        return this.varianza;
     }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5, 20);
