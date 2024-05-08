@@ -73,8 +73,8 @@ public abstract class Characters implements CharacterAction {
         this.hp.setStats(hp);
     }
 
-    public stats getGold(){
-        return this.gold;
+    public int getGold(){
+        return this.gold.getStats();
     }
     public stats getExp(){
         return this.exp;
