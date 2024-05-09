@@ -39,7 +39,7 @@ public class Plains extends Maps{
         super(player);
         this.varianza = 0;
         this.dunLvl = 2;
-        dungeons = new DungeonSet(this.varianza, this.dunLvl);
+        dungeons = new DungeonSet(this.varianza, this.dunLvl, player);
         enemigos = new EnemySet(varianza);
     }
     public int getVarianza(){
