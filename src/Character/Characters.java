@@ -47,6 +47,7 @@ public abstract class Characters implements CharacterAction {
         this.name = name;
         this.condition = condition;
         this.weapon = weapon;
+        this.gold = new stats(gold);
         this.estadisticas = new stats[10];
         setStats();
         actualMap = new Plains();
@@ -81,6 +82,9 @@ public abstract class Characters implements CharacterAction {
     public int getGold(){
         return this.gold.getStats();
     }
+    public void buyItem(int gold){
+        this.gold.setStats(this.gold.getStats() - gold);
+    }
     public stats getExp(){
         return this.exp;
     }
@@ -109,6 +113,9 @@ public abstract class Characters implements CharacterAction {
     public void Skill(Characters enemy){}
     public void addToInvetory(Weapon weapon){
         Inventory.add(weapon);
+    }
+    public void addToAlchemy(Potions potion){
+        Alchemy.add(potion);
     }
     public void changeWeapon(int opcion){
         this.weapon = Inventory.get(opcion);
@@ -145,7 +152,7 @@ public abstract class Characters implements CharacterAction {
 
     private void getInventory(){
         for(int i = 0; i < Inventory.size(); i++){
-            System.out.println(Inventory.get(i).toString());
+            System.out.println(i+" "+Inventory.get(i).toString());
         }
     }
     public void unequipWeapon(){
@@ -202,13 +209,9 @@ public abstract class Characters implements CharacterAction {
                     player.attack(enemy);
                     break;
                 case 2:
-                    if(Inventory.isEmpty()){
-                        System.out.println("El inventario esta vacio!");
-                    }else{
-                        System.out.println("Inventario");
-                        getInventory();
+
                         manageInvent(player);
-                    }
+
                     break;
                 case 3:
                     player.Skill(enemy);
@@ -239,8 +242,9 @@ public abstract class Characters implements CharacterAction {
     public void manageInvent(Characters player){
         Scanner sc = new Scanner(System.in);
         int election;
+        boolean used = false;
         System.out.println("Quieres:\n" +
-                           "1. Usar una poción\n " +
+                           "1. Usar una poción\n" +
                            "2. Cambiar de arma");
 
         int opcion = sc.nextInt();
@@ -256,19 +260,23 @@ public abstract class Characters implements CharacterAction {
                             for(int i = 0; i < Alchemy.size(); i++){
                                 if(Alchemy.get(i).getType() == 1){
                                     Alchemy.get(i).use(player);
+                                    Alchemy.remove(i);
+                                    used = true;
                                     break;
                                 }
-                                System.out.println("No te quedan pociones de vida");
                             }
+                            if(!used)System.out.println("No te quedan pociones de vida");
                             break;
                         case 2:
                             for(int i = 0; i < Alchemy.size(); i++){
                                 if(Alchemy.get(i).getType() == 2){
                                     Alchemy.get(i).use(player);
+                                    used = true;
+                                    Alchemy.remove(i);
                                     break;
                                 }
-                                System.out.println("No te quedan pociones de mana");
                             }
+                            if(!used)System.out.println("No te quedan pociones de mana");
                             break;
                         default:
                             System.out.println("No es una opcion valida");
@@ -279,6 +287,7 @@ public abstract class Characters implements CharacterAction {
                 break;
             case 2:
                 if(!Inventory.isEmpty()){
+                    System.out.println("Que armas quieres equipar?");
                     getInventory();
                     election = sc.nextInt();
                     player.changeWeapon(election);

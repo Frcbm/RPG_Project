@@ -8,7 +8,9 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 public abstract class Maps {
+    protected Shop tienda;
     protected EnemySet enemigos;
+    protected String T = new String(Character.toChars(0x1F3EA));
     protected String A = new String(Character.toChars(0x1F480));
     protected String S = new String(Character.toChars(0x1F9F1));
     protected String M = new String(Character.toChars(0x1F9F1));
@@ -25,6 +27,7 @@ public abstract class Maps {
     protected int dunLvl;
     public Maps(){};
     public Maps(Characters player) {
+        tienda= new Shop();
         this.dunLvl = 2;
         this.player = player;
         this.positionX = 28;
@@ -69,6 +72,7 @@ public abstract class Maps {
                 break;
             case "I":
                 player.manageInvent(player);
+                break;
             default:
                 break;
         }

@@ -1,5 +1,6 @@
 package Scenario;
 import Exceptions.EnterDungeon;
+import Exceptions.EnterShop;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -14,11 +15,11 @@ public class Plains extends Maps{
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,M},
             {M,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,R,R,M},
-            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,M},
+            {M,T,G,G,G,G,G,G,G,G,G,G,G,G,G,T,G,G,G,G,G,G,G,G,R,R,R,R,R,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,M},
             {M,A,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,R,R,R,R,R,R,R,M},
             {M,G,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,G,M},
-            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,G,A,M},
+            {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,R,R,T,A,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,M},
             {M,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,M},
             {M,G,G,G,G,R,R,R,R,R,R,R,G,G,G,G,G,R,R,R,R,R,G,G,G,G,G,G,G,M},
@@ -27,9 +28,9 @@ public class Plains extends Maps{
             {M,G,R,R,R,R,R,R,R,R,R,R,R,R,G,G,R,R,R,G,G,G,G,G,G,G,G,G,G,M},
             {M,R,R,R,R,R,G,G,G,G,G,R,R,R,G,G,R,R,G,G,G,G,G,G,G,G,G,G,G,M},
             {M,R,R,R,R,G,G,G,G,G,G,G,R,R,G,G,R,G,G,G,G,G,G,G,G,G,G,G,G,M},
-            {M,R,R,R,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
+            {M,R,R,R,G,G,G,G,G,G,G,G,G,T,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
             {M,R,R,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
-            {M,R,G,G,S,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
+            {M,R,T,G,S,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,M},
             {M,A,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,S,G,G,G,G,G,G,G,G,G,G,M},
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M}
     };
@@ -39,7 +40,7 @@ public class Plains extends Maps{
         super(player);
         this.varianza = 0;
         this.dunLvl = 2;
-        dungeons = new DungeonSet(this.varianza, this.dunLvl);
+        dungeons = new DungeonSet(this.varianza, this.dunLvl, player);
         enemigos = new EnemySet(varianza);
     }
     public int getVarianza(){
@@ -66,6 +67,9 @@ public class Plains extends Maps{
                 menu();
 
                 while (player.isAlive()) {
+                    x = positionX;
+                    y = positionY;
+                    if (table[positionY][positionX].equals(T)) throw new EnterShop("Bienvenido a la tienda");
                     if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                     || table[positionY][positionX].equals(S)
@@ -80,8 +84,7 @@ public class Plains extends Maps{
                             System.out.println("Has perdido...");
                         }
                     }
-                    x = positionX;
-                    y = positionY;
+
                     if(player.isAlive()){
                         menu();
                     }
@@ -100,7 +103,11 @@ public class Plains extends Maps{
 
             } catch(EnterDungeon e){
                 runMaze();
+            } catch (EnterShop e){
+                tienda.runShop(player);
+
             }
+
         }while(player.isAlive());
     }
 }
