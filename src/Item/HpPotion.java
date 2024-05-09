@@ -3,7 +3,6 @@ import Character.*;
 
 public class HpPotion extends Potions{
     public HpPotion(int level){
-
         super(level);
         this.type = 1;
     }

@@ -208,13 +208,9 @@ public abstract class Characters implements CharacterAction {
                     player.attack(enemy);
                     break;
                 case 2:
-                    if(Inventory.isEmpty()){
-                        System.out.println("El inventario esta vacio!");
-                    }else{
-                        System.out.println("Inventario");
-                        getInventory();
+
                         manageInvent(player);
-                    }
+
                     break;
                 case 3:
                     player.Skill(enemy);
@@ -245,6 +241,7 @@ public abstract class Characters implements CharacterAction {
     public void manageInvent(Characters player){
         Scanner sc = new Scanner(System.in);
         int election;
+        boolean used = false;
         System.out.println("Quieres:\n" +
                            "1. Usar una poción\n" +
                            "2. Cambiar de arma");
@@ -262,19 +259,23 @@ public abstract class Characters implements CharacterAction {
                             for(int i = 0; i < Alchemy.size(); i++){
                                 if(Alchemy.get(i).getType() == 1){
                                     Alchemy.get(i).use(player);
+                                    Alchemy.remove(i);
+                                    used = true;
                                     break;
                                 }
-                                System.out.println("No te quedan pociones de vida");
                             }
+                            if(!used)System.out.println("No te quedan pociones de vida");
                             break;
                         case 2:
                             for(int i = 0; i < Alchemy.size(); i++){
                                 if(Alchemy.get(i).getType() == 2){
                                     Alchemy.get(i).use(player);
+                                    used = true;
+                                    Alchemy.remove(i);
                                     break;
                                 }
-                                System.out.println("No te quedan pociones de mana");
                             }
+                            if(!used)System.out.println("No te quedan pociones de mana");
                             break;
                         default:
                             System.out.println("No es una opcion valida");
