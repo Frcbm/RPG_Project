@@ -6,7 +6,7 @@ public class Shop {
     private List<Weapon> weaponList;
     private List<Potions> potionList;
     public Shop(){
-<<<<<<< HEAD
+
         weaponList = new ArrayList<Weapon>();
         potionList = new ArrayList<Potions>();
         createItems();
@@ -14,10 +14,8 @@ public class Shop {
 
     private void createItems(){
 
-=======
         weaponList = new ArrayList<>();
         potionList = new ArrayList<>();
->>>>>>> 58a5a16baef0d7ff34b90252eb69293b419920e8
         Weapon sword = new Sword("Long Sword",10,10);
         Weapon staff = new Staff("Wooden Staff",6,1.1,10);
         Weapon dagger = new Dagger("Iron Dagger",8,10);
