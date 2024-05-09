@@ -47,6 +47,7 @@ public abstract class Characters implements CharacterAction {
         this.name = name;
         this.condition = condition;
         this.weapon = weapon;
+        this.gold = new stats(gold);
         this.estadisticas = new stats[10];
         setStats();
         actualMap = new Plains();

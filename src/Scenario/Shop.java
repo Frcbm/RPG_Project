@@ -6,6 +6,8 @@ public class Shop {
     private List<Weapon> weaponList;
     private List<Potions> potionList;
     public Shop(){
+        weaponList = new ArrayList<Weapon>();
+        potionList = new ArrayList<Potions>();
         createItems();
     }
 
