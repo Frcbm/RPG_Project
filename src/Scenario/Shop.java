@@ -6,11 +6,8 @@ public class Shop {
     private List<Weapon> weaponList;
     private List<Potions> potionList;
     public Shop(){
-        createItems();
-    }
-
-    private void createItems(){
-
+        weaponList = new ArrayList<>();
+        potionList = new ArrayList<>();
         Weapon sword = new Sword("Long Sword",10,10);
         Weapon staff = new Staff("Wooden Staff",6,1.1,10);
         Weapon dagger = new Dagger("Iron Dagger",8,10);
@@ -24,19 +21,20 @@ public class Shop {
         Potions Hppotion5 = new HpPotion(3);
         Potions Hppotion6 = new HpPotion(4);
 
-        weaponList.add(sword);
-        weaponList.add(staff);
-        weaponList.add(dagger);
-        weaponList.add(bow);
-        weaponList.add(longSword);
+        this.weaponList.add(sword);
+        this.weaponList.add(staff);
+        this.weaponList.add(dagger);
+        this.weaponList.add(bow);
+        this.weaponList.add(longSword);
 
-        potionList.add(Hppotion1);
-        potionList.add(Hppotion2);
-        potionList.add(Hppotion3);
-        potionList.add(Hppotion4);
-        potionList.add(Hppotion5);
-        potionList.add(Hppotion6);
+        this.potionList.add(Hppotion1);
+        this.potionList.add(Hppotion2);
+        this.potionList.add(Hppotion3);
+        this.potionList.add(Hppotion4);
+        this.potionList.add(Hppotion5);
+        this.potionList.add(Hppotion6);;
     }
+
 
     public void runShop(Characters player){
         Scanner sc = new Scanner(System.in);
