@@ -23,7 +23,7 @@ public abstract class Maps {
     protected int positionX;
     protected int positionY;
     protected int dunLvl;
-
+    public Maps(){};
     public Maps(Characters player) {
         dungeons = new Dungeon[3];
         this.dunLvl = 2;
@@ -33,15 +33,7 @@ public abstract class Maps {
         this.enemigos = new EnemySet(0);
     }
     public abstract int getVarianza();
-    public void runMaze(){
-        for(int i = 0 ; i < 4 ; i++){
-            player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));//
-        }
-        player.combat(player, dungeons[dunLvl- 2].getBoss());
-        System.out.println("Enhorabuena, has terminado la mazmorra!");
-        aumentardunLvl();
-
-    }
+    public abstract void runMaze();
     public void setEnemigos(EnemySet enemigos){
         this.enemigos = enemigos;
     }

@@ -95,6 +95,14 @@ public class Desert extends Maps {
             System.out.println(player.getHp().getStats());
         }while(player.isAlive());
     }
+    public void runMaze(){
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, player.getActualMap().enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));
+        }
+        //player.combat(player, dungeons[dunLvl- 2].getBoss());
+        System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
+    }
     protected void imprimirCuadrado(String[][] cuadrado) {
         for(int i = 0; i < player.statsLength() ; i++){
             System.out.print(player.getStatName(i) + ": " + player.getStat(i) + " ");

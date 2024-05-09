@@ -34,6 +34,7 @@ public class Plains extends Maps{
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M}
     };
     public int varianza;
+    public Plains(){super();};
     public Plains(Characters player){
         super(player);
         this.varianza = 0;
@@ -41,6 +42,14 @@ public class Plains extends Maps{
     }
     public int getVarianza(){
         return this.varianza;
+    }
+    public void runMaze(){
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));
+        }
+        //player.combat(player, dungeons[dunLvl- 2].getBoss());
+        System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
     }
     public void RunMap() {
         Weapon knife = new Sword("cuchillo", 5, 5);

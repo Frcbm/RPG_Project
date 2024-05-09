@@ -1,6 +1,7 @@
 package Character;
 import Item.*;
 import Scenario.Maps;
+import Scenario.Plains;
 
 import java.util.*;
 
@@ -48,6 +49,7 @@ public abstract class Characters implements CharacterAction {
         this.weapon = weapon;
         this.estadisticas = new stats[10];
         setStats();
+        actualMap = new Plains();
         Alchemy.add(new HpPotion(1));
     }
     public Maps getActualMap(){
@@ -190,6 +192,7 @@ public abstract class Characters implements CharacterAction {
     public boolean combat(Characters player, Characters enemy){
         Scanner sc = new Scanner(System.in);
         System.out.println(enemy.name+" te corta el paso!!");
+        System.out.println(enemy.getHp().getStats());
         int opcion;
         while(player.isAlive() && enemy.isAlive()){
             System.out.println("Elige tu acción");
@@ -226,7 +229,10 @@ public abstract class Characters implements CharacterAction {
             if(player.exp.getStats() >= 100) {
                 player.lvlUp();
             }
-            actualMap.setEnemigos(new EnemySet(actualMap.getVarianza()));
+            System.out.println(enemy.getHp().getStats());
+            enemy.setHp(enemy.getMaxHp().getStats());
+            System.out.println(enemy.getHp().getStats());
+            enemy.condition = true;
         } //Si el jugador sigue vivo al terminar el combate gana experiencia
         return player.isAlive();
     }
