@@ -81,6 +81,9 @@ public abstract class Characters implements CharacterAction {
     public int getGold(){
         return this.gold.getStats();
     }
+    public void buyItem(int gold){
+        this.gold.setStats(this.gold.getStats() - gold);
+    }
     public stats getExp(){
         return this.exp;
     }
@@ -109,6 +112,9 @@ public abstract class Characters implements CharacterAction {
     public void Skill(Characters enemy){}
     public void addToInvetory(Weapon weapon){
         Inventory.add(weapon);
+    }
+    public void addToAlchemy(Potions potion){
+        Alchemy.add(potion);
     }
     public void changeWeapon(int opcion){
         this.weapon = Inventory.get(opcion);

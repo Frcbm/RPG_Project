@@ -41,14 +41,61 @@ public class Shop {
     public void runShop(Characters player){
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido a mi tienda\n"+
-                           "Que artículo quieres comprar?");
+                           "Quieres comprar armas(1) o pociones(2)?");
 
-        showItems();
         int option = sc.nextInt();
-        if(player.getGold() > weaponList.get(option).getPrice()){
-            //Restar preu als diners totals
+        switch(option){
+            case 1:
+                showWeapons();
+                System.out.println("Que armas quieres comprar?");
+                option = sc.nextInt();
+                if(option > weaponList.size()) {
+                    System.out.println("No es una opcion valida");
+                }else{
+                    if(player.getGold() >= weaponList.get(option).getPrice()){
+                        player.buyItem(weaponList.get(option).getPrice());
+                        player.addToInvetory(weaponList.get(option));
+                        System.out.println(weaponList.get(option).getName()+" se ha añadido al inventario");
+                        weaponList.remove(option);
+                    }else{
+                        System.out.println("No tienes suficiente oro");
+                    }
+                }
+                break;
+            case 2:
+                showPotions();
+                System.out.println("Que pocion quieres comprar?");
+                option = sc.nextInt();
+                if(option > potionList.size()) {
+                    System.out.println("No es una opcion valida");
+                }else{
+                    if(player.getGold() >= potionList.get(option).getPrice()){
+                        player.buyItem(potionList.get(option).getPrice());
+                        player.addToAlchemy(potionList.get(option));
+                        System.out.println(potionList.get(option).toString()+" se ha añadido al inventario");
+                        potionList.remove(option);
+                    }else{
+                        System.out.println("No tienes suficiente oro");
+                    }
+                }
+                break;
+            default:
+                System.out.println("Opcion no valida");
+                break;
         }
+    }
 
+
+    public void showWeapons(){
+        for(int i = 0; i < weaponList.size(); i++){
+            System.out.println(i+". "+weaponList.get(i).getName());
+        }
+    }
+
+    public void showPotions(){
+        for(int i = 0; i < potionList.size(); i++){
+            System.out.println(i+". "+potionList.get(i).toString());
+        }
     }
     public void showItems(){
         for(int i = 0; i < weaponList.size(); i++){
