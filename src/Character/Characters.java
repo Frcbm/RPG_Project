@@ -152,7 +152,7 @@ public abstract class Characters implements CharacterAction {
 
     private void getInventory(){
         for(int i = 0; i < Inventory.size(); i++){
-            System.out.println(Inventory.get(i).toString());
+            System.out.println(i+" "+Inventory.get(i).toString());
         }
     }
     public void unequipWeapon(){
@@ -247,7 +247,7 @@ public abstract class Characters implements CharacterAction {
         Scanner sc = new Scanner(System.in);
         int election;
         System.out.println("Quieres:\n" +
-                           "1. Usar una poción\n " +
+                           "1. Usar una poción\n" +
                            "2. Cambiar de arma");
 
         int opcion = sc.nextInt();
@@ -286,6 +286,7 @@ public abstract class Characters implements CharacterAction {
                 break;
             case 2:
                 if(!Inventory.isEmpty()){
+                    System.out.println("Que armas quieres equipar?");
                     getInventory();
                     election = sc.nextInt();
                     player.changeWeapon(election);
