@@ -22,9 +22,6 @@ public class Main {
 
         //Dungeon dungeon = new Dungeon(Jugador);
         Maps map = new Plains(Jugador);
-        System.out.println("1 para montaña 2 para llanura 3 desierto");
-
-        System.out.println(Jugador.toString());
 
         map.RunMap();
         //dungeon.runMaze();

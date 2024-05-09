@@ -1,6 +1,7 @@
 package Character;
 import Item.*;
 import Scenario.Maps;
+import Scenario.Plains;
 
 import java.util.*;
 
@@ -24,10 +25,10 @@ public abstract class Characters implements CharacterAction {
     protected List<Potions> Alchemy = new ArrayList<>();
 
     protected boolean condition; //True para vivo, false para muerto
-    protected Maps actualMap;
+    private Maps actualMap;
     private String[] nombresStats ={"level", "hp", "maxHp", "str", "def", "intel", "agl", "mana", "maxMana", "exp","gold"};
     private stats[] estadisticas;
-
+    private EnemySet enemigos;
     public Characters(){
 
     }
@@ -48,7 +49,11 @@ public abstract class Characters implements CharacterAction {
         this.weapon = weapon;
         this.estadisticas = new stats[10];
         setStats();
+        actualMap = new Plains();
         Alchemy.add(new HpPotion(1));
+    }
+    public Maps getActualMap(){
+        return actualMap;
     }
     public void setStats(){
         this.estadisticas[0] = level;
@@ -75,6 +80,9 @@ public abstract class Characters implements CharacterAction {
 
     public int getGold(){
         return this.gold.getStats();
+    }
+    public void buyItem(int gold){
+        this.gold.setStats(this.gold.getStats() - gold);
     }
     public stats getExp(){
         return this.exp;
@@ -104,6 +112,9 @@ public abstract class Characters implements CharacterAction {
     public void Skill(Characters enemy){}
     public void addToInvetory(Weapon weapon){
         Inventory.add(weapon);
+    }
+    public void addToAlchemy(Potions potion){
+        Alchemy.add(potion);
     }
     public void changeWeapon(int opcion){
         this.weapon = Inventory.get(opcion);
@@ -140,7 +151,7 @@ public abstract class Characters implements CharacterAction {
 
     private void getInventory(){
         for(int i = 0; i < Inventory.size(); i++){
-            System.out.println(Inventory.get(i).toString());
+            System.out.println(i+" "+Inventory.get(i).toString());
         }
     }
     public void unequipWeapon(){
@@ -187,6 +198,7 @@ public abstract class Characters implements CharacterAction {
     public boolean combat(Characters player, Characters enemy){
         Scanner sc = new Scanner(System.in);
         System.out.println(enemy.name+" te corta el paso!!");
+        System.out.println(enemy.getHp().getStats());
         int opcion;
         while(player.isAlive() && enemy.isAlive()){
             System.out.println("Elige tu acción");
@@ -219,6 +231,10 @@ public abstract class Characters implements CharacterAction {
             if(player.exp.getStats() >= 100) {
                 player.lvlUp();
             }
+            System.out.println(enemy.getHp().getStats());
+            enemy.setHp(enemy.getMaxHp().getStats());
+            System.out.println(enemy.getHp().getStats());
+            enemy.condition = true;
         } //Si el jugador sigue vivo al terminar el combate gana experiencia
         return player.isAlive();
     }
@@ -270,6 +286,7 @@ public abstract class Characters implements CharacterAction {
                 break;
             case 2:
                 if(!Inventory.isEmpty()){
+                    System.out.println("Que armas quieres equipar?");
                     getInventory();
                     election = sc.nextInt();
                     player.changeWeapon(election);
@@ -347,6 +364,4 @@ public abstract class Characters implements CharacterAction {
     public int statsLength(){
         return estadisticas.length;
     }
-
-
 }

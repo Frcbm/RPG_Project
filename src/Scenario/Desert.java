@@ -1,6 +1,7 @@
 package Scenario;
 
 import Exceptions.CactusException;
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -29,13 +30,17 @@ public class Desert extends Maps {
             {M, D, D, D, D, D, D, D, D, P, A, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
-
+    private int varianza;
     public Desert(Characters player) {
         super(player);
-        enemigos = new EnemySet(2);
+        varianza = 2;
+        enemigos = new EnemySet(varianza);
+    }
+    public int getVarianza(){
+        return this.varianza;
     }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 20);
 
         int x = 0;
         int y = 0;
@@ -47,7 +52,7 @@ public class Desert extends Maps {
                 menu();
 
                 while (player.isAlive()) {
-
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                             || table[positionY][positionX].equals(S)
                             || table[positionY][positionX].equals(R)
@@ -84,9 +89,19 @@ public class Desert extends Maps {
                 positionX = x;
                 positionY = y;
                 player.takeDamage(1);
+            } catch(EnterDungeon e){
+                runMaze();
             }
             System.out.println(player.getHp().getStats());
         }while(player.isAlive());
+    }
+    public void runMaze(){
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, player.getActualMap().enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));
+        }
+        //player.combat(player, dungeons[dunLvl- 2].getBoss());
+        System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
     }
     protected void imprimirCuadrado(String[][] cuadrado) {
         for(int i = 0; i < player.statsLength() ; i++){

@@ -1,5 +1,6 @@
 package Scenario;
 
+import Exceptions.EnterDungeon;
 import Exceptions.NotAllowedException;
 import Item.Sword;
 import Item.Weapon;
@@ -33,13 +34,25 @@ public class Mountains extends Maps {
             {M, M, G, G, G, G, G, G, M, G, G, G, G, G, G, G, G, M, M, M, M, G, G, G, G, G, G, G, G, M},
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M}
     };
-
+    private int varianza;
     public Mountains(Characters player) {
         super(player);
-        enemigos = new EnemySet(1);
+        varianza = 1;
+        enemigos = new EnemySet(varianza);
+    }
+    public int getVarianza(){
+        return this.varianza;
+    }
+    public void runMaze(){
+        for(int i = 0 ; i < 4 ; i++){
+            player.combat(player, player.getActualMap().enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));
+        }
+        //player.combat(player, dungeons[dunLvl- 2].getBoss());
+        System.out.println("Enhorabuena, has terminado la mazmorra!");
+        aumentardunLvl();
     }
     public void RunMap() {
-        Weapon knife = new Sword("cuchillo", 5);
+        Weapon knife = new Sword("cuchillo", 5, 10);
 
         int x = 0;
         int y = 0;
@@ -51,7 +64,7 @@ public class Mountains extends Maps {
                 menu();
 
                 while (player.isAlive()) {
-
+                    if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)) throw new NotAllowedException("No puedes salir del mapa");
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
@@ -78,6 +91,8 @@ public class Mountains extends Maps {
                 System.out.println(ex.getMessage());
                 positionX = x;
                 positionY = y;
+            } catch(EnterDungeon e){
+                runMaze();
             }
         }while(player.isAlive());
 
