@@ -67,13 +67,14 @@ public class Plains extends Maps{
                 menu();
 
                 while (player.isAlive()) {
-                    x = positionX;
-                    y = positionY;
+
                     if (table[positionY][positionX].equals(T)) throw new EnterShop("Bienvenido a la tienda");
                     if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                     || table[positionY][positionX].equals(S)
                     || table[positionY][positionX].equals(R)) throw new NotAllowedException("No puedes salir del mapa");
+                    x = positionX;
+                    y = positionY;
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("Encuentro: " + rand);

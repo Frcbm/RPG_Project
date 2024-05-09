@@ -47,7 +47,9 @@ public class Shop {
     public void runShop(Characters player){
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido a mi tienda\n"+
-                           "Quieres comprar armas(1) o pociones(2)?");
+                           "Quieres comprar?\n" +
+                           "1. Armas\n" +
+                           "2. Pociones");
 
         int option = sc.nextInt();
         switch(option){
