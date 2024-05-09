@@ -17,7 +17,7 @@ public abstract class Maps {
     protected String D = new String(Character.toChars(0x1F7E8));
     protected String P = new String(Character.toChars(0x1F38D));
     protected String[][] table;
-    protected Dungeon[] dungeons;
+    protected DungeonSet dungeons;
     protected List<Weapon> LootWeapons;
     protected Characters player;
     protected int positionX;
@@ -25,7 +25,6 @@ public abstract class Maps {
     protected int dunLvl;
     public Maps(){};
     public Maps(Characters player) {
-        dungeons = new Dungeon[3];
         this.dunLvl = 2;
         this.player = player;
         this.positionX = 28;

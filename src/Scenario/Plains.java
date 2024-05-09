@@ -9,7 +9,7 @@ import Character.*;
 import java.util.Scanner;
 
 public class Plains extends Maps{
-
+    private DungeonSet dungeons;
     private String[][] table = {
             {M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M,M},
             {M,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,G,R,M},
@@ -38,6 +38,8 @@ public class Plains extends Maps{
     public Plains(Characters player){
         super(player);
         this.varianza = 0;
+        this.dunLvl = 2;
+        dungeons = new DungeonSet(this.varianza, this.dunLvl);
         enemigos = new EnemySet(varianza);
     }
     public int getVarianza(){
@@ -47,7 +49,7 @@ public class Plains extends Maps{
         for(int i = 0 ; i < 4 ; i++){
             player.combat(player, enemigos.getEnemigo((int)(Math.random() * (getDunLvL()) - 1)));
         }
-        //player.combat(player, dungeons[dunLvl- 2].getBoss());
+        player.combat(player, dungeons.get(dunLvl - 2).getBoss());
         System.out.println("Enhorabuena, has terminado la mazmorra!");
         aumentardunLvl();
     }
@@ -100,7 +102,5 @@ public class Plains extends Maps{
                 runMaze();
             }
         }while(player.isAlive());
-
     }
-
 }
