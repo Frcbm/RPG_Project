@@ -80,7 +80,7 @@ public class Mountains extends Maps {
                     imprimirCuadrado(this.table);
                     int rand = (int) (Math.random() * 7) + 1;
                     System.out.println("EncuentroA: " + rand);
-                    if (rand == 8) {
+                    if (rand == 7) {
                         if (player.combat(player, enemigos.getEnemigo((int)(Math.random() * 5)))) {
                             System.out.println("Combate ganado!!");
                         } else {

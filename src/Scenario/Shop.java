@@ -18,6 +18,7 @@ public class Shop {
         potionList = new ArrayList<>();
         Weapon sword = new Sword("Long Sword",10,10);
         Weapon staff = new Staff("Wooden Staff",6,1.1,10);
+        Weapon staff2 = new Staff("Archmage Staff",10,2.0,20);
         Weapon dagger = new Dagger("Iron Dagger",8,10);
         Weapon bow = new Bow("Wood Bow",11,10);
         Weapon longSword = new Sword("Long Sword",12,15);
@@ -34,6 +35,7 @@ public class Shop {
         this.weaponList.add(dagger);
         this.weaponList.add(bow);
         this.weaponList.add(longSword);
+        this.weaponList.add(staff2);
 
         this.potionList.add(Hppotion1);
         this.potionList.add(Hppotion2);
