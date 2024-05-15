@@ -20,7 +20,7 @@ public class Shop {
         Weapon staff = new Staff("Wooden Staff",6,1.1,10);
         Weapon dagger = new Dagger("Iron Dagger",8,10);
         Weapon bow = new Bow("Wood Bow",11,10);
-        Weapon longSword = new Sword("Long Sword",12,15);
+        Weapon longSword = new Sword("Long Sword",55,15);
 
         Potions Hppotion1 = new HpPotion(1);
         Potions Hppotion2 = new HpPotion(1);
@@ -48,13 +48,38 @@ public class Shop {
         Scanner sc = new Scanner(System.in);
         System.out.println("Bienvenido a mi tienda\n"+
                            "Quieres comprar armas(1) o pociones(2)?");
+        int option = 0;
+        boolean correcto = true;
+        do{
+            try{
+                option = sc.nextInt();
+                correcto = true;
+            }catch(InputMismatchException e){
+                correcto = false;
+                sc.next();
+            }
 
-        int option = sc.nextInt();
+        }while(!correcto);
+
         switch(option){
             case 1:
                 showWeapons();
                 System.out.println("Que armas quieres comprar?");
-                option = sc.nextInt();
+                correcto = true;
+                do{
+                    try{
+                        if(weaponList.isEmpty()){
+                            System.out.println("Tienes todas las armas, webón");
+                            break;
+                        }
+                        option = sc.nextInt();
+                        correcto = true;
+                    }catch(InputMismatchException e){
+                        correcto = false;
+                        sc.next();
+
+                    }
+                }while(!correcto);
                 if(option > weaponList.size()) {
                     System.out.println("No es una opcion valida");
                 }else{
@@ -64,14 +89,23 @@ public class Shop {
                         System.out.println(weaponList.get(option).getName()+" se ha añadido al inventario");
                         weaponList.remove(option);
                     }else{
-                        System.out.println("No tienes suficiente oro");
+                        System.out.println("Eres mas pobre que las ratas, desgraciao");
                     }
                 }
                 break;
             case 2:
                 showPotions();
                 System.out.println("Que pocion quieres comprar?");
-                option = sc.nextInt();
+                correcto = true;
+                do{
+                    try{
+                        option = sc.nextInt();
+                        correcto = true;
+                    }catch(InputMismatchException e){
+                        correcto = false;
+                        sc.next();
+                    }
+                }while(!correcto);
                 if(option > potionList.size()) {
                     System.out.println("No es una opcion valida");
                 }else{

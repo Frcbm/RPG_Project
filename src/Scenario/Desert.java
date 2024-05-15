@@ -1,8 +1,6 @@
 package Scenario;
 
-import Exceptions.CactusException;
-import Exceptions.EnterDungeon;
-import Exceptions.NotAllowedException;
+import Exceptions.*;
 import Item.Sword;
 import Item.Weapon;
 import Character.*;
@@ -10,21 +8,21 @@ public class Desert extends Maps {
     private String[][] table = {
             {M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M},
             {M, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, A, D, D, D, D, D, D, D, D, D, D, M},
-            {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, D, D, D, D, D, M},
+            {M, D, T, D, D, D, D, D, D, D, D, D, D, D, D, D, T, D, D, S, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, P, D, D, D, D, D, D, D, P, D, D, D, D, D, D, P, D, D, D, D, D, D, D, D, D, D, M},
-            {M, A, D, D, S, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, A, D, D, S, R, R, D, D, D, D, T, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, P, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, P, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, P, D, D, P, D, D, D, D, D, D, D, D, D, D, D, D, S, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
-            {M, D, D, D, D, D, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, T, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, R, R, D, D, D, D, D, D, D, P, D, D, D, M},
             {M, D, D, D, D, R, D, D, D, D, D, D, D, D, D, D, R, R, D, D, D, D, R, R, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, R, R, P, D, D, D, D, M},
             {M, D, D, P, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, S, D, D, D, D, M},
-            {M, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
+            {M, D, D, D, D, D, D, D, D, D, T, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, R, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, R, R, D, D, D, D, D, D, D, D, D, S, R, R, R, P, D, D, D, D, D, M},
             {M, D, D, D, D, D, D, D, D, P, A, S, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, D, M},
@@ -52,6 +50,7 @@ public class Desert extends Maps {
                 menu();
 
                 while (player.isAlive()) {
+                    if(table[positionY][positionX].equals(T)) throw new EnterShop("Bienvenido a la tienda");
                     if(table[positionY][positionX].equals(A)) throw new EnterDungeon("Entras en la mazmorra");
                     if(table[positionY][positionX].equals(M)
                             || table[positionY][positionX].equals(S)
@@ -91,6 +90,11 @@ public class Desert extends Maps {
                 player.takeDamage(1);
             } catch(EnterDungeon e){
                 runMaze();
+            }catch (EnterShop e){
+                positionX = x;
+                positionY = y;
+                tienda.runShop(player);
+
             }
             System.out.println(player.getHp().getStats());
         }while(player.isAlive());

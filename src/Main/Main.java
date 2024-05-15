@@ -12,13 +12,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-
-        Characters Jugador = new Warrior("Arturo", 1,100,100, 15, 20, 12, 7, 20, 100, 0, 1000, true, new BareKnucle());
+        Characters Jugador = new Warrior("Arturo", 1,100,150, 15, 20, 12, 7, 20, 100, 0, 1000, true, new BareKnucle());
         Characters Enemigo = new Warrior("Mordred",1,100,100, 15, 20, 12, 7, 20, 100, 0, 0, true, new BareKnucle());
 
         //Dungeon dungeon = new Dungeon(Jugador);
         Maps map = new Plains(Jugador);
 
+
+        map.RunMap();
+        map = new Mountains(Jugador);
+        map.RunMap();
+        map = new Desert(Jugador);
         map.RunMap();
         //dungeon.runMaze();
         Jugador.getStats();

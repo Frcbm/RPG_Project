@@ -10,6 +10,7 @@ import java.util.*;
 public abstract class Maps {
     protected Shop tienda;
     protected EnemySet enemigos;
+    protected String W = new String(Character.toChars(0x1F6AA));
     protected String T = new String(Character.toChars(0x1F3EA));
     protected String A = new String(Character.toChars(0x1F480));
     protected String S = new String(Character.toChars(0x1F9F1));
